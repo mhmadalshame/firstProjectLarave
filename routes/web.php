@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShowProfile;
 use App\Http\Controllers\admin\AdminservicesController;
+use App\Http\Controllers\admin\AdminDecisionController;
+use App\Http\Controllers\admin\AdminDecisionTypeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,12 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 Route::resource("admin/sevices",AdminservicesController::class);
+Route::resource("admin/decision",AdminDecisionController::class);
+Route::resource("admin/decisiontype",AdminDecisionTypeController::class);
+
 Route::post("admin/sevices/serach",[AdminservicesController::class,"serach"])->name("sevices.serach");
+Route::post("admin/decision/serach",[AdminDecisionController::class,"serach"])->name("decision.serach");
+Route::post("admin/decisiontype/serach",[AdminDecisionTypeController::class,"serach"])->name("decisiontype.serach");
+
 
 

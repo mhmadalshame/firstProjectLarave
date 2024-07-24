@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\DecisionType;
 
-use App\Models\Service;
-class AdminservicesController extends Controller
+class AdminDecisionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,24 +15,20 @@ class AdminservicesController extends Controller
      */
     public function index()
     {
-     $services=Service::all();
-     $data=[
-      "all_services" => $services
-     ];
-     return View("admin.services.index",$data);
+        $decision=DecisionType::all();
+        $data=[
+         "all_decisions" => $decision
+        ];
+        return View("admin.decisiontype.index",$data);
     }
-
-
-    /**
+ /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-
-        return View("admin.services.create");
-
+        return View("admin.decisiontype.create");
     }
 
     /**
@@ -43,16 +39,16 @@ class AdminservicesController extends Controller
      */
     public function store(Request $request)
     {
-
-        Service::create([
+        DecisionType::create([
             "name"=>$request->name,
-            "descrption"=>$request->des
+
+
 
 
         ]);
 
 
-        return redirect()->route('sevices.index');
+        return redirect()->route('decisiontype.index');
     }
 
     /**
@@ -65,28 +61,29 @@ class AdminservicesController extends Controller
     {
         //
     }
-public function serach(Request $request){
-    $services=Service::where('name','like','%'.$request->name.'%')->paginate(10);
 
-
-     $data=[
-      "all_services" => $services
-     ];
-     return View("admin.services.index",$data);
-}
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function serach(Request $request){
+        $decision=DecisionType::where('name','like','%'.$request->name.'%')->paginate(10);
+
+
+         $data=[
+          "all_decisions" => $decision
+         ];
+         return View("admin.decisiontype.index",$data);
+    }
     public function edit($id)
     {
-        $service = Service::find($id);
+        $decision = DecisionType::find($id);
 
         // show the edit form and pass the shark
-        return View('admin.services.edit')
-            ->with('service', $service);
+        return View('admin.decisiontype.edit')
+            ->with('decision', $decision);
     }
 
     /**
@@ -98,11 +95,10 @@ public function serach(Request $request){
      */
     public function update(Request $request, $id)
     {
-        $service = Service::find($id);
-        $service->update([ "name"=>$request->name,
-        "descrption"=>$request->des]);
-        return redirect()->route('sevices.index');
-
+        $decision = DecisionType::find($id);
+        $decision->update([ "name"=>$request->name
+    ]);
+        return redirect()->route('decisiontype.index');
     }
 
     /**
@@ -113,11 +109,10 @@ public function serach(Request $request){
      */
     public function destroy($id)
     {
-        $service = Service::find($id);
-        $service->delete();
+        $decision = DecisionType::find($id);
+        $decision->delete();
 
-        return redirect()->route('sevices.index');
+        return redirect()->route('decisiontype.index');
+    }  //
 
-
-    }
 }
