@@ -44,6 +44,11 @@ class AdminservicesController extends Controller
     public function store(Request $request)
     {
 
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'descrption' => 'required',
+
+        ]);
         Service::create([
             "name"=>$request->name,
             "descrption"=>$request->des
@@ -66,6 +71,11 @@ class AdminservicesController extends Controller
         //
     }
 public function serach(Request $request){
+    $validatedData = $request->validate([
+        'name' => 'required|max:255',
+
+
+    ]);
     $services=Service::where('name','like','%'.$request->name.'%')->paginate(10);
 
 
@@ -98,6 +108,11 @@ public function serach(Request $request){
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'descrption' => 'required',
+
+        ]);
         $service = Service::find($id);
         $service->update([ "name"=>$request->name,
         "descrption"=>$request->des]);

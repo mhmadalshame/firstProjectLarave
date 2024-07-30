@@ -51,6 +51,11 @@ class AdminDecisionController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'decision_type_id' => 'required',
+        ]);
         Decision::create([
             "title"=>$request->title,
             "content"=>$request->content,
@@ -82,6 +87,11 @@ class AdminDecisionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function serach(Request $request){
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+
+        ]);
+
         $decision=Decision::where('title','like','%'.$request->title.'%')->paginate(10);
         foreach($decision as $dec ){
             $dec->decision_type_id=DecisionType::find($dec->decision_type_id);
@@ -94,7 +104,7 @@ class AdminDecisionController extends Controller
     }
     public function edit($id)
     {
-      
+
 
         $decision = Decision::find($id);
         $decisiontype = DecisionType::all();
@@ -121,6 +131,11 @@ $data=[
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'decision_type_id' => 'required',
+        ]);
         $decision = Decision::find($id);
         $decision->update([ "title"=>$request->title,
         "content"=>$request->content,

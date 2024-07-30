@@ -39,6 +39,10 @@ class AdminDecisionTypeController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+
+        ]);
         DecisionType::create([
             "name"=>$request->name,
 
@@ -69,6 +73,10 @@ class AdminDecisionTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function serach(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+
+        ]);
         $decision=DecisionType::where('name','like','%'.$request->name.'%')->paginate(10);
 
 
@@ -95,6 +103,10 @@ class AdminDecisionTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+
+        ]);
         $decision = DecisionType::find($id);
         $decision->update([ "name"=>$request->name
     ]);
