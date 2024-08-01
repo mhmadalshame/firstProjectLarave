@@ -128,6 +128,8 @@ public function serach(Request $request){
      */
     public function destroy($id)
     {
+
+
         $service = Service::find($id);
         $service->delete();
 

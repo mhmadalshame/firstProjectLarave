@@ -5,6 +5,7 @@ use App\Http\Controllers\ShowProfile;
 use App\Http\Controllers\admin\AdminservicesController;
 use App\Http\Controllers\admin\AdminDecisionController;
 use App\Http\Controllers\admin\AdminDecisionTypeController;
+use App\Models\Categorie;
 
 
 /*
@@ -40,6 +41,9 @@ Route::resource("admin/decisiontype",AdminDecisionTypeController::class);
 Route::post("admin/sevices/serach",[AdminservicesController::class,"serach"])->name("sevices.serach");
 Route::post("admin/decision/serach",[AdminDecisionController::class,"serach"])->name("decision.serach");
 Route::post("admin/decisiontype/serach",[AdminDecisionTypeController::class,"serach"])->name("decisiontype.serach");
+Route::get('/factory', function () {
+    Categorie::factory()->count(50)->create();
 
+});
 
 
